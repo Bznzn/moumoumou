@@ -1,0 +1,36 @@
+appId: com.moumoumou.salaryfloat
+productName: 牛马冲冲冲
+asar: true
+directories:
+  output: release
+  buildResources: assets
+files:
+  - dist/**/*
+  - package.json
+extraResources:
+  - from: prototypes/window-interactions/build/SalaryGestureProbe.app
+    to: native/SalaryGestureProbe.app
+  - from: prototypes/window-interactions/build/SalaryPresentationProbe.app
+    to: native/SalaryPresentationProbe.app
+mac:
+  target:
+    - target: dmg
+      arch: arm64
+  minimumSystemVersion: '13.0'
+  category: public.app-category.finance
+  identity: '-'
+  hardenedRuntime: false
+  icon: assets/icon.icns
+  extendInfo:
+    LSUIElement: true
+dmg:
+  title: 牛马冲冲冲
+  contents:
+    - x: 145
+      y: 180
+      type: file
+    - x: 430
+      y: 180
+      type: link
+      path: /Applications
+artifactName: SalaryFloat-${version}-${arch}.${ext}

@@ -1,0 +1,8 @@
+import type{AppConfig}from'../../shared/model';
+import{Temporal}from'@js-temporal/polyfill';
+import{monthDates,isWorkday}from'../../shared/calendar';
+export function Calendar({config,month,onMonth,onToggle,onClear}:{config:AppConfig;month:string;onMonth:(month:string)=>void;onToggle:(date:string)=>void;onClear:()=>void}){
+  const dates=monthDates(month),offset=Temporal.PlainDate.from(dates[0]).dayOfWeek-1;
+  const shift=(direction:number)=>onMonth(Temporal.PlainYearMonth.from(month).add({months:direction}).toString());
+  return <section className="calendar" aria-label="排班日历"><div className="section-heading"><div className="month-navigation"><button type="button" className="icon-button" aria-label="上个月" onClick={()=>shift(-1)}>‹</button><span>{month.replace('-',' 年 ')} 月</span><button type="button" className="icon-button" aria-label="下个月" onClick={()=>shift(1)}>›</button></div><button type="button" className="text-button" onClick={onClear}>清除本月调整</button></div><div className="calendar-grid"><div className="weekday">一</div><div className="weekday">二</div><div className="weekday">三</div><div className="weekday">四</div><div className="weekday">五</div><div className="weekday">六</div><div className="weekday">日</div>{Array.from({length:offset},(_,i)=><span key={'empty'+i}/>)}{dates.map(date=>{const work=isWorkday(date,config);return <button key={date} type="button" className="calendar-day" aria-label={`${date}，${work?'上班':'休息'}`} aria-pressed={work} data-adjusted={Object.hasOwn(config.dateOverrides,date)} onClick={()=>onToggle(date)}>{Number(date.slice(-2))}</button>;})}</div><div className="calendar-legend"><span><i className="swatch work"/>上班</span><span><i className="swatch"/>休息</span><span>圆点表示手动调整</span></div></section>;
+}

@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'"><title>原生交互验证</title>
+<style>body{font:13px -apple-system,BlinkMacSystemFont,sans-serif;background:#252528;color:#e8e1d0;padding:20px;line-height:1.6}h1{font-size:20px;font-weight:500}p{color:#bbb4a5}button{display:block;width:100%;padding:11px;margin:9px 0;border:1px solid #76684f;border-radius:8px;background:#37332d;color:#e8d4a8;font:inherit}pre{font:11px SFMono-Regular,monospace;white-space:pre-wrap;overflow-wrap:anywhere;color:#bdb6a7}#status{color:#ead5a5}strong{color:#e1c9a1}</style></head>
+<body><h1>真实 Mac 交互验证</h1><p>仅原型，不是正式应用。先打开独立的后方原生窗口，再比较三种路由。</p>
+<button data-action="workpad">打开独立原生后方窗口</button>
+<button data-action="through">对照一：鼠标穿透（不能拖动）</button>
+<button data-action="drag">对照二：正常拖动（不穿透）</button>
+<button data-action="combined">实验：单击穿透＋直接拖动</button>
+<button data-action="opacity">切换 45% / 100% 不透明度预览</button>
+<p>实验组合需要辅助功能权限，程序不会自动申请或修改系统权限。该实验会暂存覆盖区域内的鼠标按下事件，单击释放后重放、拖动则移动悬浮窗；需要实测事件顺序及系统三指拖动。</p>
+<div id="status" role="status"></div><pre id="events"></pre>
+<button data-action="quit">退出全部原型进程</button><script src="renderer.cjs"></script></body></html>

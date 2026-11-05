@@ -1,0 +1,16 @@
+node_modules/
+dist/
+release/
+.superpowers/
+.cache/
+.DS_Store
+.idea/
+.env
+.env.*
+!.env.example
+playwright-report/
+test-results/
+docs/verification/
+scripts/diagnostics/
+prototypes/window-interactions/build/
+prototypes/window-interactions/evidence/

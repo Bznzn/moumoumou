@@ -1,0 +1,20 @@
+{
+  "name": "salary-float-native-probe",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Isolated macOS interaction feasibility experiment; not the product",
+  "main": "main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "build:native": "node build-native.cjs",
+    "check": "node --check main.cjs && node --check preload.cjs && node --check renderer.cjs && node --check panel.cjs",
+    "test": "npm run test:gesture && npm run test:presentation",
+    "test:gesture": "mkdir -p build/module-cache && xcrun swiftc -module-cache-path build/module-cache native/GestureState.swift native/GestureStateTests.swift -o build/gesture-tests && ./build/gesture-tests",
+    "test:presentation": "mkdir -p build/module-cache && xcrun swiftc -module-cache-path build/module-cache native/PresentationGeometry.swift native/PresentationGeometryTests.swift -o build/geometry-tests && ./build/geometry-tests",
+    "native:build": "mkdir -p build/module-cache && xcrun swiftc -module-cache-path build/module-cache native/preflight.swift -o build/preflight",
+    "native:check": "npm run native:build && ./build/preflight"
+  },
+  "devDependencies": {
+    "electron": "45.2.2"
+  }
+}
